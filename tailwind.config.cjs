@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        weworkteal: {
+        'weworkteal': {
+          50: "#d9f7f5",
           100: "#cfeeeb",
           200: "#9fded6",
           300: "#6fcdc2",
