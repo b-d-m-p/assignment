@@ -1,18 +1,44 @@
 /* Injects Tailwind's base styles & any base styles registered by plugins. */
 @tailwind base;
 
-@layer base { /* custom CSS goes here */ }
+@layer base {
+	/* custom CSS goes here */
+}
 
 /* Injects Tailwind's component classes & any component classes registered by plugins. */
 @tailwind components;
 
-@layer components { /* custom CSS goes here */ }
+@layer components {
+	/* custom CSS goes here */
+}
 
 /* Injects Tailwind's utility classes & any utility classes registered by plugins. */
 @tailwind utilities;
 
-@layer utilities { /* custom CSS goes here */ }
+@layer utilities {
+	/* custom CSS goes here */
+}
 
 /* Directive controlling where Tailwind injects responsive variations of utilities.
    By default Tailwind normally append these at the end of your stylesheet. */
 @tailwind screens;
+
+
+/* ==========================================================================
+   Global styles
+   ========================================================================== */
+
+button {
+	@apply hover:text-weworkteal-500;
+}
+
+.shadow-inner {
+	--tw-shadow: inset 0 2px 4px 0 rgb(90 90 90 / 25%);
+}
+
+input[type='number']:hover {
+	outline: 1px solid #9fded6;
+}
+input[type='number']:focus-visible {
+	outline: 1px solid #0fac99;
+}
