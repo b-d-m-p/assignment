@@ -1,5 +1,21 @@
-<script></script>
+<script>
+	import Input from './Input.svelte'
+	let value = "Today";
+	let inputType = "text"
+	let tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+  let localISOTime = (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
+  console.log(localISOTime)  // => '2015-01-26T06:40:36.181'
+	let theDate = localISOTime.slice(0, 10);
+	console.log(theDate);
+// 	let theDate = new Date().toISOString().slice(0, 10);
+	function inputTodaysDate(e) {
+		inputType = "date";
+		e.target.value = theDate;
+	}
+</script>
 
+<input type="text" class="bg-red-300" />
+<Input type={inputType} on:focus={inputTodaysDate} {value}/>
 <div class="mt-8 mb-4 md:flex md:items-center md:justify-between">
 	<form
 		action=""
@@ -25,11 +41,18 @@
 				/>
 			</svg>
 			<label for="date" class="text-md font-semibold text-gray-700">Date</label>
-			<button
-				class="px-3 py-1 inline-flex text-sm ml-2 leading-5 font-bold rounded-full bg-weworkteal-500 text-white hover:bg-weworkteal-600"
-			>
-				Today
-			</button>
+
+			<div class="relative">
+				<div class="chevron-down" />
+				<input
+					type="text"
+					id="filterDate"
+					name="date"
+					placeholder="Today"
+					onfocus="(this.type='date')"
+					class="px-3 py-1 inline-flex text-sm ml-2 leading-5 font-bold rounded-full bg-weworkteal-500 text-white hover:bg-weworkteal-600"
+				/>
+			</div>
 			<button class="text-sm mx-4 text-gray-500">Change</button>
 		</div>
 		<div
@@ -96,5 +119,46 @@
 	.people-count:hover {
 		@apply bg-weworkteal-200 -my-2  z-10 rounded-xl font-bold text-white cursor-pointer;
 		border: none !important;
+	}
+
+	input[type='date'] {
+	}
+
+	#filterDate:focus-visible {
+		@apply outline-none;
+	}
+	/* input[type='date']::-webkit-inner-spin-button,
+	input[type='date']::-webkit-calendar-picker-indicator {
+		opacity: 0;
+	} */
+
+	#filterDate::-webkit-calendar-picker-indicator {
+		display: block;
+		background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3IDEwTDEyIDE1TDcgMTAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=)
+			no-repeat;
+		width: 20px;
+		height: 20px;
+		border-width: thin;
+	}
+
+	#filterDate {
+		color: #fff;
+		width: 145px;
+		height: 32px;
+	}
+
+	#filterDate::placeholder {
+		color: #fff;
+	}
+
+	.chevron-down {
+		position: absolute;
+		pointer-events: none;
+		background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3IDEwTDEyIDE1TDcgMTAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cjwvc3ZnPgo=)
+			no-repeat;
+		width: 20px;
+		height: 20px;
+		right: 16px;
+		top: 4px;
 	}
 </style>
